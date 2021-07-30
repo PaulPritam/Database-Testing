@@ -1,3 +1,5 @@
+// Program to establish connectivity with database and run sql queries
+
 package com.bridgelabz.selenium;
 
 import javax.swing.plaf.nimbus.State;
@@ -19,7 +21,7 @@ public class SqlConnectivity {
 
             while (resultset.next()) {
                 String col1 = resultset.getString(1);
-                String col2 = resultset.getString(3);
+                String col2 = resultset.getString(2);
                 System.out.println(col1+ " " + col2);
             }
 
