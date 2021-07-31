@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bridgelabz.selenium.selenium1.SeleniumDBT" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-07-31T16:26:02" hostname="DESKTOP-389CR00" time="0.033">
+  <properties/>
+  <testcase name="should_UpdataDataInDatabase" classname="com.bridgelabz.selenium.selenium1.SeleniumDBT" time="0.016"/>
+  <testcase name="shouldReturn_AllDataFromDatabase" classname="com.bridgelabz.selenium.selenium1.SeleniumDBT" time="0.017"/>
+  <system-out><![CDATA[1 Cat 25 carnivorous
+2 Dog 30 carnivorous
+3 Cow 15 herbivorous
+4 Lion 30 carnivorous
+5 Rabbit 15 Herbivorous
+6 Bear 40 omnnivorous
+7 Crocodile 29 carnivorous
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

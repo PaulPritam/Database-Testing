@@ -13,18 +13,19 @@ public class SqlConnectivity {
         Connection con = null;
 
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(url,username,password);
-            Statement statement = con.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM operation");
-            ResultSetMetaData resultSetMetaData = resultset.getMetaData();
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(url, username, password);
+        Statement statement = con.createStatement();
+        ResultSet resultset = statement.executeQuery("SELECT * FROM operation");
+        ResultSetMetaData resultSetMetaData = resultset.getMetaData();
 
-            while (resultset.next()) {
-                String col1 = resultset.getString(1);
-                String col2 = resultset.getString(2);
-                System.out.println(col1+ " " + col2);
-            }
-
+        System.out.println("col1" + "\t" + "col2");
+        while (resultset.next()) {
+            String col1 = resultset.getString(1);
+            String col2 = resultset.getString(2);
+            System.out.println(col1 + "\t\t" + col2);
         }
+
     }
+}
 

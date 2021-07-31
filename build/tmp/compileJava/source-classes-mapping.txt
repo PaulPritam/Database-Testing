@@ -1,2 +1,2 @@
-com/bridgelabz/selenium.java
- com.bridgelabz.selenium
+com/bridgelabz/selenium/SqlConnectivity.java
+ com.bridgelabz.selenium.SqlConnectivity
