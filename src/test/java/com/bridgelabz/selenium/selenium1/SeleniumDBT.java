@@ -3,7 +3,6 @@ package com.bridgelabz.selenium.selenium1;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.sql.*;
 
 public class SeleniumDBT {
@@ -17,10 +16,11 @@ public class SeleniumDBT {
     public static String password = "Pritampaul@1997";
 
     @BeforeTest
-    public void authentication() throws Exception {
+    public Connection authentication() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url, username, password);
         statement = connection.createStatement();
+        return connection;
     }
 
     /*
@@ -29,8 +29,8 @@ public class SeleniumDBT {
     @Test(priority = 4)
     public void shouldReturn_AllDataFromDatabase() {
         try {
-            String query = "SELECT * FROM operation";
 
+            String query = "SELECT * FROM operation";
             ResultSet res = statement.executeQuery(query);
 
             while (res.next()) {
@@ -39,6 +39,7 @@ public class SeleniumDBT {
                 System.out.print(" " + res.getString(3));
                 System.out.println(" " + res.getString(4));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,12 +49,18 @@ public class SeleniumDBT {
     DB Testing for insert query
      */
     @Test(priority = 1)
-    public void should_InsertQuery() {
+    public void should_InsertQuery(){
         try {
-            String query = "INSERT INTO operation(sno,animal,span,animal_type) " +
-                    "VALUES (8,'Squirrel',8,'herbivorous')";
+            connection = this.authentication();
 
-            statement.executeUpdate(query);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO operation values" +
+                    "(?,?,?,?)");
+            preparedStatement.setInt(1,8);
+            preparedStatement.setString(2,"Squirrel");
+            preparedStatement.setInt(3,10);
+            preparedStatement.setString(4,"herbivorous");
+
+            preparedStatement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,9 +73,14 @@ public class SeleniumDBT {
     @Test(priority = 2)
     public void should_DeletedataFromDatabase() {
         try {
-            String query = "DELETE FROM operation WHERE sno=8";
+            connection = this.authentication();
 
-            statement.executeUpdate(query);
+            String query = "DELETE FROM operation WHERE span = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,10);
+
+            preparedStatement.executeUpdate();
+            connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,12 +91,18 @@ public class SeleniumDBT {
     DB Testing for Updating a column
      */
     @Test(priority = 3)
-    public void should_UpdataDataInDatabase() {
-        try {
-            String query = "UPDATE operation SET span =40 " +
-                    "WHERE animal = 'Bear'";
+    public void should_UpdataDataInDatabase(){
 
-            statement.executeUpdate(query);
+        try {
+            connection = this.authentication();
+
+            String query = "UPDATE operation SET span =? WHERE animal = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,25);
+            preparedStatement.setString(2,"Crocodile");
+
+            preparedStatement.executeUpdate();
+            connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
